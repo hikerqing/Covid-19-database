@@ -1,0 +1,3 @@
+/* 
+This part supports for basic query operations
+*/
