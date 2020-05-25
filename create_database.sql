@@ -1,18 +1,19 @@
+
 /*
 create Covid-19 database
 */
 CREATE TABLE drug
 (
-	drug_id int,
-	drug_name varchar(50),
-	drug_status varchar(25),
+    drug_id int,
+    drug_name varchar(50),
+    drug_status varchar(25),
     drug_type varchar(25),
     primary key (drug_id)
 );
 
 CREATE TABLE clinical_trial
 (
-	trial_id int,
+    trial_id int,
     title varchar(50),
     trial_type varchar(25),
     trial_stage varchar(25),
@@ -27,8 +28,8 @@ CREATE TABLE clinical_trial
 
 CREATE TABLE trial_drug
 (
-	trial_id int,
-	drug_id int,
+    trial_id int,
+    drug_id int,
     primary key(trial_id),
     foreign key(trial_id) references clinical_trial(trial_id),
     foreign key(drug_id) references drug(drug_id)
@@ -36,7 +37,7 @@ CREATE TABLE trial_drug
 
 create table researcher
 (
-	researcher_id int,
+    researcher_id int,
     first_name varchar(25),
     last_name varchar(25),
     position varchar(25),
@@ -48,7 +49,7 @@ create table researcher
 
 create table institution
 (
-	institution_id int,
+    institution_id int,
     institution_location varchar(50),
     instituiton_money int,
     institution_email varchar(25),
@@ -58,8 +59,8 @@ create table institution
 
 create table institution_researcher
 (
-	researcher_id int,
-	institution_id int,
+    researcher_id int,
+    institution_id int,
     primary key (researcher_id),
     foreign key(researcher_id) references researcher(researcher_id),
     foreign key(institution_id) references institution(institution_id)
@@ -67,7 +68,7 @@ create table institution_researcher
 
 create table experiment
 (
-	trial_id int,
+    trial_id int,
     batch_id int,
     experiment_description varchar(100),
     start_date date,
@@ -82,13 +83,13 @@ create table experiment
 
 create table researcher_experiment
 (
-	researcher_id int,
+    researcher_id int,
     trial_id int,
-	batch_id int,
+    batch_id int,
     division varchar(20),
     primary key(researcher_id),
     foreign key(researcher_id) references researcher(researcher_id),
-    foreign key(trial_id,batch_id) references experiment(trial_id,batch_id),
+    foreign key(trial_id,batch_id) references experiment(trial_id,batch_id)
 );
 
 CREATE TABLE volunteer
@@ -110,7 +111,7 @@ CREATE TABLE volunteer_experiment
     batch_id int,
     PRIMARY KEY (volunteer_id),
     FOREIGN KEY (volunteer_id) REFERENCES volunteer(volunteer_id),
-    FOREIGN KEY (trial_id, batch_id) REFERENCES clinical_trial(trial_id, batch_id),
+    FOREIGN KEY (trial_id, batch_id) REFERENCES experiment(trial_id, batch_id)
 );
 
 CREATE TABLE SITE
@@ -128,7 +129,7 @@ CREATE TABLE hospital
     hospital_id int,
     site_id int,
     hospital_name VARCHAR(20),
-    PRIMARY KEY (hospital_id,site_id),
+    PRIMARY KEY (hospital_id, site_id),
     FOREIGN KEY (site_id) REFERENCES SITE(site_id)
 );
 
@@ -143,8 +144,7 @@ CREATE TABLE doctor
     gender VARCHAR(5),
     age INT,
     PRIMARY KEY (doctor_id,site_id ,hospital_id),
-    FOREIGN KEY (hospital_id) REFERENCES hospital(hospital_id),
-    FOREIGN KEY (site_id) REFERENCES SITE(site_id)
+    FOREIGN KEY (hospital_id, site_id) REFERENCES hospital(hospital_id, site_id)
 );
 
 CREATE TABLE cases
