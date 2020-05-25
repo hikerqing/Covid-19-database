@@ -1,7 +1,6 @@
 /*
-build the covid 19 database 
+create Covid-19 database
 */
-create database covid19database;
 CREATE TABLE drug
 (
 	drug_id int,
@@ -108,11 +107,10 @@ CREATE TABLE volunteer_experiment
 (
     volunteer_id int,
     trial_id int,
-    experiment_id int,
+    batch_id int,
     PRIMARY KEY (volunteer_id),
     FOREIGN KEY (volunteer_id) REFERENCES volunteer(volunteer_id),
-    FOREIGN KEY (trial_id) REFERENCES clinical_trial(trial_id),
-    FOREIGN KEY (experiment_id) REFERENCES experiment(experiment_id)
+    FOREIGN KEY (trial_id, batch_id) REFERENCES clinical_trial(trial_id, batch_id),
 );
 
 CREATE TABLE SITE
