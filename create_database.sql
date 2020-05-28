@@ -160,7 +160,6 @@ CREATE TABLE cases
     situation varchar(20),
     suspected_date date,
     confirmed_date date,
-    live BOOLEAN,
     left_date date,
     PRIMARY KEY (case_id, site_id),
     FOREIGN KEY (site_id) REFERENCES SITE(site_id) 
